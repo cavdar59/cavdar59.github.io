@@ -1,69 +1,25 @@
 #!/usr/bin/perl -w
-
-
 use strict;
-
-
 use IO::Socket;
 
-
- 
-
 sub Wait  {
-
-
     wait;
-
-
 }
-
-
- 
 
 $SIG{CHLD} = \&Wait;
 
-
- 
-
 my $server = IO::Socket::INET->new(
-
-
-        LocalPort    => cavdar,
-
-
+        LocalPort    => 1137,
         Type         => SOCK_STREAM,
-
-
         Reuse        => 1,
-
-
         Listen       => 10) or die "$@\n";
-
-
 my $client ;
 
-
- 
-
 while($client = $server->accept()) {
-
-
         select $client;
-
-
         print $client "HTTP/1.0 200 OK\r\n";
-
-
         print $client "Content-type: text/p\r\n\r\n";
-
-
         print $client '<html>
-
-
-  <center>
-
-
-  <html>
 <head>
 <style>
 body{
@@ -90,29 +46,9 @@ text-align:center;
 <iframe src="https://cavdar59.github.io/cavdar.mp3" width="560"></iframe>
 </div>
 </html>
-</body>
-
-
-
-  </center>
-
-
-  </html>';
-
-
+</body>';
 }
-
-
 continue {
-
-
         close($client);
-
-
         kill CHLD -> -$$;
-
-
 }
-
-
-
