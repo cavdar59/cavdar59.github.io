@@ -5,7 +5,7 @@ import random
 import re
 
 #global params
-url=''/*buraları değiştirmeyin consoldan oto değiştiricek*/
+url=''
 host=''
 headers_useragents=[]
 headers_referers=[]
